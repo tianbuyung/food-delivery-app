@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import Navigation from "@/components/Navigation";
+import { ApolloWrapper } from "@/lib/apollo-wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navigation />
-        {children}
+        <ApolloWrapper>{children}</ApolloWrapper>
       </body>
     </html>
   );
