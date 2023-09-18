@@ -38,7 +38,7 @@ function RestaurantCard({ data }: any) {
           width={300}
           src={`${process.env.NEXT_PUBLIC_API_URL}${data.attributes.image.data[0].attributes.url}`}
           alt=""
-          priority={true}
+          priority
         />
         <div className="p-8">
           <h3 className="mb-3 font-heading text-xl text-gray-900 hover:text-gray-700 group-hover:underline font-black">
@@ -64,7 +64,7 @@ function RestaurantCard({ data }: any) {
 }
 
 function RestaurantList(props: any) {
-  const { error, data } = useSuspenseQuery(QUERY);
+  const { error, data }: any = useSuspenseQuery(QUERY);
 
   if (error) return "Error loading restaurants";
 
