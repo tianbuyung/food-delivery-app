@@ -14,7 +14,7 @@ export default function LoginRoute() {
   const router = useRouter();
   const { setUser } = useUserContext();
 
-  const handleLogin = async (e: FormEvent) => {
+  const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
 
     const { email, password } = formData;
@@ -56,7 +56,7 @@ export default function LoginRoute() {
       buttonText="Login"
       formData={formData}
       setFormData={setFormData}
-      callback={handleLogin}
+      callback={loginHandler}
       error={error}
     />
   );
