@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Navigation from "@/components/Navigation";
 import { ApolloWrapper } from "@/contexts/ApolloWrapper";
 import { UserProvider } from "@/contexts/UserProvider";
+import { CartProvider } from "@/contexts/CartProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <UserProvider>
-          <Navigation />
-          <ApolloWrapper>{children}</ApolloWrapper>
+          <CartProvider>
+            <Navigation />
+            <ApolloWrapper>{children}</ApolloWrapper>
+          </CartProvider>
         </UserProvider>
       </body>
     </html>
