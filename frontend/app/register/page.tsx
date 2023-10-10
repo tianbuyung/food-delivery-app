@@ -46,8 +46,6 @@ export default function RegisterRoute() {
         return;
       }
 
-      console.log(data);
-
       Cookie.set("token", data.jwt);
       setUser(data.user);
 

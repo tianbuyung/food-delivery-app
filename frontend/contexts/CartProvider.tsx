@@ -9,7 +9,7 @@ interface CartContextType {
   removeItem: (item: any) => void;
   resetCart: () => void;
   showCart: boolean;
-  setShowCart: (show: boolean) => void;
+  setShowCart: (show: any) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -35,14 +35,14 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       };
       setCart((prevCart: any) => ({
         items: [...prevCart.items, newItem],
-        total: prevCart.total + item.attributes.priceInCents,
+        total: prevCart.total + item.attributes.price,
       }));
     } else {
       setCart((prevCart: any) => ({
         items: prevCart.items.map((i: any) =>
           i.id === newItem.id ? { ...i, quantity: i.quantity + 1 } : i
         ),
-        total: prevCart.total + item.attributes.priceInCents,
+        total: prevCart.total + item.attributes.price,
       }));
     }
   };
@@ -54,12 +54,12 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
         items: prevCart.items.map((i: any) =>
           i.id === newItem.id ? { ...i, quantity: i.quantity - 1 } : i
         ),
-        total: prevCart.total - item.attributes.priceInCents,
+        total: prevCart.total - item.attributes.price,
       }));
     } else {
       setCart((prevCart: any) => ({
         items: prevCart.items.filter((i: any) => i.id !== item.id),
-        total: prevCart.total - item.attributes.priceInCents,
+        total: prevCart.total - item.attributes.price,
       }));
     }
   };

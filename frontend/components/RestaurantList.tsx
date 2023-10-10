@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const QUERY = gql`
-  {
+  query Restaurants {
     restaurants {
       data {
         id
@@ -17,6 +17,7 @@ const QUERY = gql`
           description
           image {
             data {
+              id
               attributes {
                 url
               }
@@ -40,11 +41,11 @@ function RestaurantCard({ data }: any) {
           alt=""
           priority
         />
-        <div className="p-8">
+        <div className="p-6">
           <h3 className="mb-3 font-heading text-xl text-gray-900 hover:text-gray-700 group-hover:underline font-black">
             {data.attributes.name}
           </h3>
-          <p className="text-sm text-gray-500 font-bold">
+          <p className="text-sm text-gray-500 font-bold line-clamp-3">
             {data.attributes.description}
           </p>
           <div className="flex flex-wrap md:justify-center -m-2">
@@ -73,7 +74,7 @@ function RestaurantList(props: any) {
       query.attributes.name.toLowerCase().includes(props.query.toLowerCase())
     );
 
-    if (searchQuery.length != 0) {
+    if (searchQuery.length !== 0) {
       return (
         <div className="py-16 px-8 bg-white rounded-3xl">
           <div className="max-w-7xl mx-auto">
