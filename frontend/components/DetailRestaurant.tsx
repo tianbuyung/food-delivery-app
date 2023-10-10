@@ -5,7 +5,8 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 
 import Image from "next/image";
 
-import { centsToDollars } from "@/utils/centToDollars";
+import { centsToDollars } from "@/utils/centsToDollars";
+import { useCartContext } from "@/contexts/CartProvider";
 
 const GET_RESTAURANT_DISHES = gql`
   query ($id: ID!) {
@@ -23,6 +24,7 @@ const GET_RESTAURANT_DISHES = gql`
                 price
                 image {
                   data {
+                    id
                     attributes {
                       url
                     }
@@ -38,8 +40,11 @@ const GET_RESTAURANT_DISHES = gql`
 `;
 
 function DishCard({ data }: any) {
-  function handleAddItem() {
-    // will add some logic here
+  const { addItem, setShowCart } = useCartContext();
+
+  function addItemHandler() {
+    addItem(data);
+    setShowCart(true);
   }
 
   return (
@@ -67,7 +72,7 @@ function DishCard({ data }: any) {
             <div className="w-full md:w-auto p-2 my-6">
               <button
                 className="block w-full px-12 py-3.5 text-lg text-center text-white font-bold bg-gray-900 hover:bg-gray-800 focus:ring-4 focus:ring-gray-600 rounded-full"
-                onClick={handleAddItem}
+                onClick={addItemHandler}
               >
                 + Add to Cart
               </button>
