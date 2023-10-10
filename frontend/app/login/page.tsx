@@ -6,11 +6,13 @@ import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
 
 import Form from "@/components/Form";
+import { useUserContext } from "@/contexts/UserProvider";
 
 export default function LoginRoute() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const router = useRouter();
+  const { setUser } = useUserContext();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -40,6 +42,7 @@ export default function LoginRoute() {
       }
 
       Cookie.set("token", data.jwt);
+      setUser(data.user);
 
       router.push("/");
     } catch (error: any) {
