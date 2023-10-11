@@ -4,8 +4,8 @@
  * order controller
  */
 
-const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const { createCoreController } = require("@strapi/strapi").factories;
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async create(ctx) {
